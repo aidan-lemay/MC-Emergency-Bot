@@ -47,4 +47,3 @@
 * `/ops [keyword]`: Returns recent RIT Campus Operations ClearCut transcripts with optional matching keywords
 * `/tgs [keyword]`: Returns MONCON Talkgroups with optional matching keywords
 * `/tg [tg] [keyword]`: Returns recent ClearCut transcripts from specified TG with optional matching keywords
-
