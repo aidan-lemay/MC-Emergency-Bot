@@ -1,4 +1,4 @@
-from interactions import Client, Intents, listen, slash_command, SlashContext, OptionType, slash_option, File, Embed, EmbedAttachment
+from interactions import Client, Intents, listen, slash_command, SlashContext, OptionType, slash_option, Embed
 from datetime import datetime, timedelta
 import storage
 import requests
@@ -178,6 +178,9 @@ async def pogle(ctx: SlashContext):
     embed.add_image("https://aidanlemay.com/pogle.jpg")
     await ctx.send(embed=embed)
 
+@slash_command(name="ping", description="Get API Latency")
+async def ping(ctx: SlashContext):
+    await ctx.send(f"Command to Bot to API Latency: ({float(bot.latency)}ms)")
 # ------------------ End Help / Meta Commands ------------------
 
 # ------------------ RSS Commands ------------------
