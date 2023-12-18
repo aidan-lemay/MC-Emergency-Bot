@@ -1,15 +1,19 @@
 from interactions import Client, Intents, listen, slash_command, SlashContext, OptionType, slash_option, Embed
-from datetime import datetime, timedelta
+from datetime import datetime, time, timedelta
 import storage
 import requests
 from requests_html import HTMLSession
 
-monems = "https://clearcutradio.app/api/v1/calls?system=us-ny-monroe&talkgroup=1077"
-monfire = "https://clearcutradio.app/api/v1/calls?system=us-ny-monroe&talkgroup=1811"
-henfire = "https://clearcutradio.app/api/v1/calls?system=us-ny-monroe&talkgroup=1654"
-ritpub = "https://clearcutradio.app/api/v1/calls?system=us-ny-monroe&talkgroup=3070"
-ritamb = "https://clearcutradio.app/api/v1/calls?system=us-ny-monroe&talkgroup=1894"
-ritops = "https://clearcutradio.app/api/v1/calls?system=very-bad&talkgroup=100"
+ts_now = int(time.time())
+
+ts_24 = ts_now - (24 * 60 * 60)
+
+monems = "https://clearcutradio.app/api/v1/calls?system=us-ny-monroe&talkgroup=1077" + "&before_ts=" + ts_now + "&after_ts=" + ts_24
+monfire = "https://clearcutradio.app/api/v1/calls?system=us-ny-monroe&talkgroup=1811" + "&before_ts=" + ts_now + "&after_ts=" + ts_24
+henfire = "https://clearcutradio.app/api/v1/calls?system=us-ny-monroe&talkgroup=1654" + "&before_ts=" + ts_now + "&after_ts=" + ts_24
+ritpub = "https://clearcutradio.app/api/v1/calls?system=us-ny-monroe&talkgroup=3070" + "&before_ts=" + ts_now + "&after_ts=" + ts_24
+ritamb = "https://clearcutradio.app/api/v1/calls?system=us-ny-monroe&talkgroup=1894" + "&before_ts=" + ts_now + "&after_ts=" + ts_24
+ritops = "https://clearcutradio.app/api/v1/calls?system=very-bad&talkgroup=100" + "&before_ts=" + ts_now + "&after_ts=" + ts_24
 
 # ------------------ ClearCut Functions ------------------
 
@@ -333,6 +337,15 @@ async def a911(ctx: SlashContext, events: int = 20):
 # ------------------ End RSS Commands ------------------
 
 # ------------------ ClearCut Commands ------------------
+match = ["RIT", "rit", "R I T", "r i t", "6359", "6 3 5 9", "6-3-5-9", "Defib 63", "DEFIB 63", "defib 63", "Defib 6-3", "DEFIB 6-3", "defib 6-3", "601", "6 0 1", "Andrews", "Andrews Memorial", "Andrews Memorial Drive", "Lomb", "Lomb Memorial", "Lomb Memorial Drive", "Lowenthall", "Perkins", "Riverknoll", "University Commons", "John", "John Street", "Wiltsie", "Greenleaf", "Greenleaf Court", "Gleason", "Reynolds", "Kimball", "Farnum", "Charters"]
+
+def matching(sentence, words):
+    # Convert both the sentence and words to lowercase for case-insensitive comparison
+    lowercase_sentence = sentence.lower()
+    lowercase_words = [word.lower() for word in words]
+
+    # Check if any word in the array is present in the sentence
+    return any(word in lowercase_sentence for word in lowercase_words)
 
 @slash_command(name="ems", description="ClearCut EMS Transcripts")
 @slash_option(
@@ -447,7 +460,7 @@ async def rit(ctx: SlashContext):
             text = data['transcript']['text']
 
             # Get all calls within num range with matching keywords
-            if ("RIT" in text or "6359" in text or "6-3-5-9" in text or "Defib 63" in text or "DEFIB 63" in text or "defib 63" in text):
+            if (matching(text, match)):
                 message += str(timestamp) + " | " + text + "\n\n"
 
     response = get_source_clearcut(henfire)
@@ -459,7 +472,7 @@ async def rit(ctx: SlashContext):
             text = data['transcript']['text']
 
             # Get all calls within num range with matching keywords
-            if ("RIT" in text):
+            if (matching(text, match)):
                 message += str(timestamp) + " | " + text + "\n\n"
 
     n = 1994 # chunk length
@@ -479,7 +492,7 @@ async def rite(ctx: SlashContext):
             text = data['transcript']['text']
 
             # Get all calls within num range with matching keywords
-            if ("RIT" in text or "6359" in text or "6-3-5-9" in text or "Defib 63" in text or "DEFIB 63" in text or "defib 63" in text):
+            if (matching(text, match)):
                 message += str(timestamp) + " | " + text + "\n\n"
 
     message = message[ 0 : 1997 ]
@@ -498,7 +511,7 @@ async def ritf(ctx: SlashContext):
             text = data['transcript']['text']
 
             # Get all calls within num range with matching keywords
-            if ("RIT" in text):
+            if (matching(text, match)):
                 message += str(timestamp) + " | " + text + "\n\n"
 
     message = message[ 0 : 1997 ]
