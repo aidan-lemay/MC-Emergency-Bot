@@ -1,5 +1,6 @@
+import time
 from interactions import Client, Intents, listen, slash_command, SlashContext, OptionType, slash_option, Embed
-from datetime import datetime, time, timedelta
+from datetime import datetime, timedelta
 import storage
 import requests
 from requests_html import HTMLSession
