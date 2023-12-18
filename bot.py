@@ -9,12 +9,12 @@ ts_now = int(time.time())
 
 ts_24 = ts_now - (24 * 60 * 60)
 
-monems = "https://clearcutradio.app/api/v1/calls?system=us-ny-monroe&talkgroup=1077" + "&before_ts=" + ts_now + "&after_ts=" + ts_24
-monfire = "https://clearcutradio.app/api/v1/calls?system=us-ny-monroe&talkgroup=1811" + "&before_ts=" + ts_now + "&after_ts=" + ts_24
-henfire = "https://clearcutradio.app/api/v1/calls?system=us-ny-monroe&talkgroup=1654" + "&before_ts=" + ts_now + "&after_ts=" + ts_24
-ritpub = "https://clearcutradio.app/api/v1/calls?system=us-ny-monroe&talkgroup=3070" + "&before_ts=" + ts_now + "&after_ts=" + ts_24
-ritamb = "https://clearcutradio.app/api/v1/calls?system=us-ny-monroe&talkgroup=1894" + "&before_ts=" + ts_now + "&after_ts=" + ts_24
-ritops = "https://clearcutradio.app/api/v1/calls?system=very-bad&talkgroup=100" + "&before_ts=" + ts_now + "&after_ts=" + ts_24
+monems = "https://clearcutradio.app/api/v1/calls?system=us-ny-monroe&talkgroup=1077" + "&before_ts=" + str(ts_now) + "&after_ts=" + str(ts_24)
+monfire = "https://clearcutradio.app/api/v1/calls?system=us-ny-monroe&talkgroup=1811" + "&before_ts=" + str(ts_now) + "&after_ts=" + str(ts_24)
+henfire = "https://clearcutradio.app/api/v1/calls?system=us-ny-monroe&talkgroup=1654" + "&before_ts=" + str(ts_now) + "&after_ts=" + str(ts_24)
+ritpub = "https://clearcutradio.app/api/v1/calls?system=us-ny-monroe&talkgroup=3070" + "&before_ts=" + str(ts_now) + "&after_ts=" + str(ts_24)
+ritamb = "https://clearcutradio.app/api/v1/calls?system=us-ny-monroe&talkgroup=1894" + "&before_ts=" + str(ts_now) + "&after_ts=" + str(ts_24)
+ritops = "https://clearcutradio.app/api/v1/calls?system=very-bad&talkgroup=100" + "&before_ts=" + str(ts_now) + "&after_ts=" + str(ts_24)
 
 # ------------------ ClearCut Functions ------------------
 
